@@ -1,0 +1,60 @@
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card p-4 shadow-lg booking-card">
+  
+      <!-- Title -->
+      <h3 class="text-center mb-4">
+        <i class="fa-solid fa-ticket me-2"></i> Book Your Bus Ticket
+      </h3>
+  
+      <form>
+  
+        <!-- Row: From + To -->
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-location-dot me-1"></i> From
+            </label>
+            <section [(ngModel)] = "searchObj.fromLocation" class = "form-select">
+              <option value="">Select From Location</option>
+              @for (item of locationList ; track $index)
+              {
+                <option [value]="item.locationId">{{item.locationName}}</option>
+              }
+            </section>
+            
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              <i class="fa-solid fa-location-dot me-1"></i> To
+            </label>
+            <option value="">Select To Location</option>
+            <section [(ngModel)] = "searchObj.toLocation" class = "form-select">
+              @for(item of locationList ; track $index)
+              {
+                <option [value]="item.locationId">{{item.locationName}}</option>
+              }
+            </section>
+          </div>
+        </div>
+  
+        <!-- Date -->
+        <div class="mb-4">
+          <label class="form-label">
+            <i class="fa-solid fa-calendar-days me-1"></i> Date of Journey
+          </label>
+          <input [(ngModel)] = "searchObj.date" type="date" class="form-control">
+        </div>
+  
+        <!-- Button -->
+        <div class="text-center">
+          <button (click) = "searchBus()" class = "btn btn-primary px-4">
+            <i class="fa-solid fa-magnifying-glass me-1"></i> Search Buses
+          </button>
+        </div>
+  
+      </form>
+  
+    </div>
+  </div>
+  
