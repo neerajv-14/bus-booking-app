@@ -14,13 +14,13 @@
             <label class="form-label">
               <i class="fa-solid fa-location-dot me-1"></i> From
             </label>
-            <section [(ngModel)] = "searchObj.fromLocation" class = "form-select">
+            <select [(ngModel)] = "searchObj.fromLocation"  class = "form-select">
               <option value="">Select From Location</option>
               @for (item of locationList ; track $index)
               {
                 <option [value]="item.locationId">{{item.locationName}}</option>
               }
-            </section>
+            </select>
             
           </div>
 
@@ -28,13 +28,14 @@
             <label class="form-label">
               <i class="fa-solid fa-location-dot me-1"></i> To
             </label>
-            <option value="">Select To Location</option>
-            <section [(ngModel)] = "searchObj.toLocation" class = "form-select">
+            
+            <select [(ngModel)] = "searchObj.toLocation" class = "form-select">
+              <option value="">Select To Location</option>
               @for(item of locationList ; track $index)
               {
                 <option [value]="item.locationId">{{item.locationName}}</option>
               }
-            </section>
+            </select>
           </div>
         </div>
   
