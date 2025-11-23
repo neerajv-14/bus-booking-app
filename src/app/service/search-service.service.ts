@@ -1,0 +1,20 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IScheduleData, Search } from '../model/model';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SearchService {
+
+  constructor(private http: HttpClient) { }
+
+  searchBus(searchObj: Search){
+    return this.http.get('https://api.freeprojectapi.com/api/BusBooking/searchBus2?fromLocation=' + searchObj.fromLocation  + '&toLocation=' + searchObj.toLocation+'&travelDate=' + searchObj.date);
+  }
+
+  getBusScheduleById(scheduleId: number) : Observable<IScheduleData> {
+    return this.http.get<IScheduleData>('https://api.freeprojectapi.com/api/BusBooking/GetBusScheduleById?id='+scheduleId);
+  }
+}
