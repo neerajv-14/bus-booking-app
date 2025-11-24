@@ -1,1 +1,68 @@
-<p>search-result works!</p>
+<div class="container my-5">
+
+    <h2 class="mb-4 fw-bold">Available Buses</h2>
+  
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-outline-primary me-2">
+        <i class="fa-solid fa-filter"></i> Filter
+      </button>
+      <button class="btn btn-outline-primary">
+        <i class="fa-solid fa-sort"></i> Sort
+      </button>
+    </div>
+  
+    @for(bus of searchBusResult; track bus.scheduleId){
+    <div class="card shadow-sm p-3 rounded-4">
+      <div class="row align-items-center">
+  
+        <!-- Left Section: Bus Info -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-1">
+            <i class="fa-solid fa-bus me-2"></i> {{bus.busName}}
+          </h5>
+          <p class="text-muted mb-2">
+            <i class="fa-solid fa-bed me-2"></i> AC Sleeper
+          </p>
+  
+          <!-- Rating + Fast Tag -->
+          <div class="d-flex gap-2">
+            <span class="badge bg-success">
+              <i class="fa-solid fa-star"></i> 4.5
+            </span>
+            <span class="badge bg-info text-dark">Fast</span>
+          </div>
+        </div>
+  
+        <!-- Departure -->
+        <div class="col-md-2 text-center">
+          <p class="fw-semibold mb-1">Departure</p>
+          <p><i class="fa-regular fa-clock me-2"></i>{{bus.departureTime | date: 'hh:mm:ss'}}</p>
+        </div>
+  
+        <!-- Duration -->
+        <div class="col-md-2 text-center">
+          <p class="fw-semibold mb-1">Duration</p>
+          <p><i class="fa-regular fa-clock me-2"></i>8h 30m</p>
+        </div>
+  
+        <!-- Arrival -->
+        <div class="col-md-2 text-center">
+          <p class="fw-semibold mb-1">Arrival</p>
+          <p><i class="fa-regular fa-clock me-2"></i>{{bus.arrivalTime | date: 'hh:mm:ss'}}</p>
+        </div>
+  
+        <!-- Price + Arrow -->
+        <div class="col-md-2 text-end">
+          <p class="fw-semibold mb-1">Price</p>
+          <p><i class="fa-solid fa-indian-rupee-sign me-1"></i>{{bus.price}}</p>
+          <p class="text-success small">Best Price</p>
+  
+          <button class="btn btn-primary rounded-circle" [routerLink]="['/book-ticket',bus.scheduleId]">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+  
+      </div>
+    </div>
+}
+  </div>

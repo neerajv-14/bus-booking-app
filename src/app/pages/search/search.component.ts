@@ -15,10 +15,7 @@ export class SearchComponent implements OnInit{
   http = inject(HttpClient);
   router = inject(Router);
   locationList: any[] = [];
-  from!: string;
-  to!: string;
-  date!: string;
-  searchObj!: Search;
+  searchObj: Search = new Search();
 
   ngOnInit(): void {
     //debugger;
@@ -27,7 +24,7 @@ export class SearchComponent implements OnInit{
 
   getAllBusLocations()
   {
-    //debugger;
+    // debugger;
     this.http.get("https://api.freeprojectapi.com/api/BusBooking/GetBusLocations").subscribe((data:any)=>{
         this.locationList = data;
     });
@@ -35,19 +32,9 @@ export class SearchComponent implements OnInit{
 
 
   searchBus(){
-    // this.http.get('https://api.freeprojectapi.com/api/BusBooking/searchBus2?fromLocation=' + this.searchObj.fromLocation  + '&toLocation=' + this.searchObj.toLocation+'&travelDate=' + this.searchObj.date)
-    // .subscribe((data:any)=> {
-
-    // });
-    // this.from = this.searchObj.fromLocation;
-    // this.to = this.searchObj.toLocation;
-    // this.date = this.searchObj.date;
-    this.searchObj.fromLocation = "1";
-    this.searchObj.toLocation = "2";
-    this.searchObj.date = "18-10-2023";
-    //this.router.navigate(['/search-result',this.from, this.to ,this.date]);
-
+    console.log(this.searchObj);
     this.router.navigate(['/search-result',this.searchObj.fromLocation, this.searchObj.toLocation ,this.searchObj.date]);
+    //this.router.navigate(['/search-result',"141", "142" ,"19-02-2025"]);
   }
 
 }

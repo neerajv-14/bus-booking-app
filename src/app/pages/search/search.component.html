@@ -14,11 +14,11 @@
             <label class="form-label">
               <i class="fa-solid fa-location-dot me-1"></i> From
             </label>
-            <select [(ngModel)] = "searchObj.fromLocation"  class = "form-select">
+            <select [(ngModel)] = "searchObj.fromLocation"  class = "form-select" [ngModelOptions]="{standalone: true}">
               <option value="">Select From Location</option>
-              @for (item of locationList ; track $index)
+              @for (item of locationList; track $index)
               {
-                <option [value]="item.locationId">{{item.locationName}}</option>
+                <option [value]="item.locationId">{{item.code}}</option>
               }
             </select>
             
@@ -29,11 +29,11 @@
               <i class="fa-solid fa-location-dot me-1"></i> To
             </label>
             
-            <select [(ngModel)] = "searchObj.toLocation" class = "form-select">
+            <select [(ngModel)] = "searchObj.toLocation" class = "form-select" [ngModelOptions]="{standalone: true}">
               <option value="">Select To Location</option>
               @for(item of locationList ; track $index)
               {
-                <option [value]="item.locationId">{{item.locationName}}</option>
+                <option [value]="item.locationId">{{item.code}}</option>
               }
             </select>
           </div>
@@ -44,7 +44,7 @@
           <label class="form-label">
             <i class="fa-solid fa-calendar-days me-1"></i> Date of Journey
           </label>
-          <input [(ngModel)] = "searchObj.date" type="date" class="form-control">
+          <input [(ngModel)] = "searchObj.date" type="date" class="form-control" [ngModelOptions]="{standalone: true}">
         </div>
   
         <!-- Button -->
