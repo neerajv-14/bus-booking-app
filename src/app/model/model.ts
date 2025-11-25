@@ -40,12 +40,11 @@ export interface ISearchBus {
     totalSeats: number;
   }
 
-  export interface BusBooking {
-    bookingId: number
-    custId: number
-    bookingDate: string
-    scheduleId: number
-    busBookingPassengers: BusBookingPassenger[]
+  export class BusBooking {
+
+    constructor(private bookingId:number, private custId: number, private bookingDate: Date, private scheduleId: number, private busBookingPassengers: BusBookingPassenger[]){
+      
+    }
   }
   
   export class BusBookingPassenger {

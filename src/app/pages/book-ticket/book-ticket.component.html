@@ -43,17 +43,19 @@
           <!-- SEAT GRID -->
           <div class="container text-center">
             <div class="row">
-              <div 
-                class="col-2 mb-3" 
-                *ngFor="let seat of seatArray"
-                style="display: flex; justify-content: center;">
-                
-                <button class="btn seat available">
-                  {{ seat }}
-                </button>
-          
-              </div>
+              @for (seat of seatArray; track seat) {
+                <div class="col-2 mb-3 d-flex justify-content-center">
+                  <button
+                    class="btn seat"
+                    (click)="onSelect(seat)"
+                    [ngClass]="isSeatSelected(seat) ? 'booked' : 'available'"
+                  >
+                    {{ seat }}
+                  </button>
+                </div>
+              }
             </div>
+            
           </div>
           
 
@@ -77,7 +79,7 @@
             }
             @else{
               <p class="fw-semibold mb-1">Selected Seats</p>
-              @for(passenger of selectedSeatArray; track "passenger.passengerId"){
+              @for(passenger of selectedSeatArray; track $index){
                 <span class="badge bg-primary rounded-pill me-1">Seat {{passenger.seatNo}}</span>
               }
             }
@@ -107,19 +109,56 @@
   
           <!-- Contact Details -->
           <p class="fw-semibold">Contact Details</p>
-  
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" placeholder="Enter email">
+          @for(passenger of selectedSeatArray; track $index){
+          <div class="row">
+            <div class="mb-3">
+              <label class="form-label">Passenger{{$index + 1}} name</label>
+              <input [(ngModel)] = "passenger.passengerName" type="text" class="form-control" placeholder="Enter name">
+            </div>
+    
+            <div class="mb-3">
+              <label class="form-label">Gender of Passenger{{$index + 1}}</label>
+              
+
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    [name]="'gender' + $index"
+                    id="male" 
+                    value="male"
+                    [(ngModel)] = "passenger.gender"
+                  />
+                  <label class="form-check-label" for="male">
+                    Male
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    [name]="'gender' + $index"
+                    id="female" 
+                    value="female"
+                    [(ngModel)] = "passenger.gender"
+                  />
+                  <label class="form-check-label" for="female">
+                    Female
+                  </label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Age of Passenger{{$index + 1}}</label>
+              <input [(ngModel)] = "passenger.age" type="number" class="form-control" placeholder="Enter phone number">
+            </div>
+
+            <hr>
           </div>
-  
-          <div class="mb-3">
-            <label class="form-label">Phone</label>
-            <input type="text" class="form-control" placeholder="Enter phone number">
-          </div>
-  
-          <button class="btn btn-primary w-100 py-2 mt-2">
-            Proceed to Pay
+        }
+          <button class="btn btn-primary w-100 py-2 mt-2" (click)="completeBooking()" type = "button">
+            Book tickets
           </button>
   
         </div>
@@ -132,8 +171,8 @@
   <style>
     
     .available { background: #f8f9fa; }
-    .booked { background: #d3d3d3; cursor: not-allowed; }
-    .selected { background: #4c5fd7; color: white; }
+    .booked { background: #d3d3d3; }
+    .selected { background: #4c5fd7; color:rgb(92, 222, 92); cursor: not-allowed}
     .seat-grid { width: 100%; }
 
     .seat {
