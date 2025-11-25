@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IScheduleData, Search } from '../model/model';
+import { BusBooking, IScheduleData, Search } from '../model/model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,5 +16,9 @@ export class SearchService {
 
   getBusScheduleById(scheduleId: number) : Observable<IScheduleData> {
     return this.http.get<IScheduleData>('https://api.freeprojectapi.com/api/BusBooking/GetBusScheduleById?id='+scheduleId);
+  }
+
+  postBooking(busbooking: BusBooking){
+    return this.http.post("https://api.freeprojectapi.com/api/BusBooking/PostBusBooking",busbooking);
   }
 }
