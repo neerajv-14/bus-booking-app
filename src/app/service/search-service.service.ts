@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SearchService {
+  getLocationById(location: number) {
+    return this.http.get("https://api.freeprojectapi.com/api/BusBooking/GetBusLocationById?id="+location);
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +23,9 @@ export class SearchService {
 
   postBooking(busbooking: BusBooking){
     return this.http.post("https://api.freeprojectapi.com/api/BusBooking/PostBusBooking",busbooking);
+  }
+
+  getSeatsForScheduleId(scheduleId: number){
+    return this.http.get("https://api.freeprojectapi.com/api/BusBooking/getBookedSeats?shceduleId="+ scheduleId);
   }
 }
